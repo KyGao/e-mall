@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>登录界面</title>
+</head>
+<style>
+/* 让页面所有元素的padding和margin都设置为0 */ 
+*{margin:0;padding:0;box-sizing:border-box;}
+/* 设置背景图，字体设置为微软雅黑 */ 
+body{background:url(images/bg.jpg);font-family: "微软雅黑", sans-serif;}
+
+/* 整个登录框的css，并使用绝对定位居中 */ 
+#login { 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    width:300px;
+    height:300px;
+}
+/* 前面分析过的h1标签的css，text-shadow设置阴影使文字更好看，letter-spacing设置字符间距 */ 
+#login h1 { color:#FFEEDD; text-shadow: 0px 10px 8px #555555; letter-spacing:2px;text-align:center;margin-bottom:20px; }
+
+/* 两个输入框的css，border属性设置边框线粗细以及颜色，border-radius设置边框的圆角角度 */
+input{
+    padding:10px;
+    width:100%;
+    color:black;
+    margin-bottom:10px;
+    background-color:floralwhite;
+    border: 1px solid black;
+    border-radius:4px;
+    letter-spacing:2px;
+}
+
+
+.type_in{margin:0 auto; width:200px;}
+.xhg_button{float:right; font-size:15px; margin:15px 0 0 0; color:#5566FF;}
+
+/* 整个登录框的css，并使用绝对定位居中 */ 
+#register { 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    width:300px;
+    height:300px;
+    display:none;
+}
+/* 前面分析过的h1标签的css，text-shadow设置阴影使文字更好看，letter-spacing设置字符间距 */ 
+#register h1 { color:#FFEEDD; text-shadow: 0px 10px 8px #555555; letter-spacing:2px;text-align:center;margin-bottom:20px; }
+#register_buy{ margin:0 auto;}
+#register_sell{ margin:0 auto;}
+//.type_up{margin:50px auto; width:300px;}
+.jmp_button{margin:0 auto; width:80px;}
+
+/* 登录按钮的css，cursor:pointer当鼠标移到按钮上面时变成小手形状 */
+#btn{
+    width:100%;
+    padding:10px;
+    background-color:rgb(243, 245, 121);
+    border:1px solid black;
+    border-radius:4px;
+    cursor:pointer; 
+}
+</style>
+<script src="clienthint.js?a=12"></script>
+
+
+<body>
+
+<!--登录-->
+  <div id="login">
+	<h1>Login</h1>
+    <!--输入账号密码-->
+    <div class="type_in">
+      <input name="userid" id="userid" type="text" required="required" placeholder="用户名">
+    </div>
+    <div class="type_in">
+      <input name="password" id="password" type="password" required="required" placeholder="密码">
+    </div>
+
+    <!--功能按钮（登录/注册）-->
+    <div class="type_in">
+      <input type="button" id="btn" value="注册" onclick="regis_check()">
+      <input type="button" id="btn" value="登录" onclick="check()">
+      <input  type="hidden" id="identity_flag" name="identity_flag" value=1 />
+      <p class="xhg_button"  onclick="exchange(this)">商家登录请点击此</p>  <!--点击更改买家模式/卖家模式-->
+    </div>
+
+    <!--异常检测（账号重复等问题）-->
+    <div class="type_in">
+      <div style="color:#00F; font-size:14px; margin:12px 0 0 0" id="warning">  
+      </div>
+    </div>
+  </div>
+
+
+<!--注册-->
+<div id="register">
+<h1>Register</h1>
+  <!--买家注册-->
+  <div id="register_buy">
+    <div class="type_up">
+      <input required="required" placeholder="用户ID" type="text" class="class_buy" name="userid" id="userid1" onkeyup="repeat_check(this)"/>
+    </div>
+    <div class="type_up">
+      <input required="required" placeholder="昵称" type="text"  class="class_buy" name="username" id="username1" />
+    </div>
+    <div class="type_up">
+      <input required="required" placeholder="密码" type="text"  class="class_buy" name="password" id="password1" />
+    </div>
+    <div class="type_up">
+      <input required="required" placeholder="存款" type="text"  class="class_buy" name="cunkuan" id="cunkuan1" />
+    </div>
+  </div>
+
+  <!--卖家注册-->
+  <div id="register_sell">
+    <div class="type_up">
+      <input required="required" placeholder="商家ID" type="text"  class="class_sell" name="userid" id="shangjiaid0"  onkeyup="repeat_check(this)"/>
+    </div>
+    <div class="type_up">
+      <input required="required" placeholder="店铺名"" type="text" class="class_sell" name="username" id="shangjianame0" />
+    </div>
+    <div class="type_up">
+      <input required="required" placeholder="密码" type="text" class="class_sell" name="password" id="password0" />
+    </div>
+    <div class="type_up">
+      <input required="required" placeholder="商家地址" type="text"  class="class_sell" name="dizhi" id="dizhi0" />
+    </div>
+    <div class="type_up">
+      <input required="required" placeholder="存款" type="text" class="class_sell" name="cunkuan" id="cunkuan0" />
+    </div>
+  </div>
+  <!--异常检测（账号重复等问题）-->
+  <div class="type_in">
+    <p id="warning1" style="color:#900"></p>
+  </div>
+  <div class="type_in">
+    <input type="button" id="btn" value="注册" class="jmp_button" onclick="register()">
+    <input type="button" id="btn" value="登录" class="jmp_button" onclick="login_check()">
+  </div>
+</div>  
+</body>
+</html>
+ 
