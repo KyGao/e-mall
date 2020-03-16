@@ -1,5 +1,7 @@
 ## E-mall system
 
+> 2019年 华科自动化 电子商务课程设计 周剑岚老师
+
 This is a simple course design (*E-commerce* by Associate Prof. Jianlan Zhou) that basically achieve some functions both for customers and sellers.
 
 Develop Environment: Use **xampp** to utilize the scripts and **navicat8** for the database.
